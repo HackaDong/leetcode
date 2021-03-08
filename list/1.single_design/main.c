@@ -56,23 +56,25 @@ void myLinkedListAddAtTail(MyLinkedList* obj, int val) {
 void myLinkedListAddAtIndex(MyLinkedList* obj, int index, int val) {
     if(index <= 0)
         myLinkedListAddAtHead(obj, val);
-    MyLinkedList *new = (MyLinkedList *)malloc(sizeof(MyLinkedList));
-    int i;
-    for(i = 0; i < index; i++){
-        if(obj->next)
-            obj = obj->next;
-        else
-            break;
-    }
-    if(i == index){
-        if(!obj->next)
-            myLinkedListAddAtTail(obj, val);
-        else{
-            new->val = val;
-            new->next = obj->next;
-            obj->next = new;
-        }
-    } 
+	else{
+			MyLinkedList *new = (MyLinkedList *)malloc(sizeof(MyLinkedList));
+			int i;
+			for(i = 0; i < index; i++){
+				if(obj->next)
+					obj = obj->next;
+				else
+					break;
+			}
+			if(i == index){
+				if(!obj->next)
+					myLinkedListAddAtTail(obj, val);
+				else{
+					new->val = val;
+					new->next = obj->next;
+					obj->next = new;
+				}
+			} 
+	}
 }
 
 /** Delete the index-th node in the linked list, if the index is valid. */
@@ -119,10 +121,10 @@ void myLinkedListFree(MyLinkedList* obj) {
 
 int main(){
 	int val;
-	MyLinkedList *obj = myLinkedListCreate;
-	myLinkedListAddAtHead(2);
-	myLinkedListAddAtIndex(0, 1);
-	val = myLinkedListGet(1);
+	MyLinkedList *obj = myLinkedListCreate();
+	myLinkedListAddAtHead(obj, 2);
+	myLinkedListAddAtIndex(obj, 0, 1);
+	val = myLinkedListGet(obj, 1);
 	printf("%d\n", val);
 	return 0;
 	
